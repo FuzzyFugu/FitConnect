@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Find your people. Move together.</h1>
+  <p class="lead">Organise and join running clubs, yoga sessions and group hikes near you.</p>
+  <div class="hero-actions">
+    <a class="btn btn-lg" href="{{ url_for('auth.register') }}">Get started</a>
+    <a class="btn-ghost btn-lg" href="{{ url_for('events.list_events') }}">Browse events</a>
+  </div>
+</section>
+
+<section>
+  <h2>Next up</h2>
+  {% if events %}
+    <div class="card-grid">
+      {% for event in events %}
+        <a class="card" href="{{ url_for('events.detail', event_id=event.id) }}">
+          <span class="tag">{{ event.category }}</span>
+          <h3>{{ event.title }}</h3>
+          <p class="muted">{{ event.starts_at.strftime('%a %d %b · %H:%M') }}</p>
+          <p class="muted">{{ event.location }}</p>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="muted">No events yet — be the first to create one!</p>
+  {% endif %}
+</section>
+{% endblock %}

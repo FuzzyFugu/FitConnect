@@ -1,0 +1,104 @@
+/* FitConnect stylesheet
+   A small, dependency-free design system: one accent colour, generous spacing,
+   card-based layout. Mobile-first and responsive. */
+
+:root {
+  --accent: #2f9e6f;
+  --accent-dark: #227a55;
+  --ink: #1c2b28;
+  --muted: #6b7c78;
+  --bg: #f5f8f6;
+  --card: #ffffff;
+  --border: #e2eae6;
+  --radius: 12px;
+  --shadow: 0 2px 8px rgba(30, 60, 50, 0.06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.55;
+}
+
+.container { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
+
+/* Header */
+.site-header { background: var(--card); border-bottom: 1px solid var(--border); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem; }
+.brand { font-weight: 800; font-size: 1.35rem; text-decoration: none; color: var(--ink); }
+.brand span { color: var(--accent); }
+.nav { display: flex; gap: 1.1rem; align-items: center; flex-wrap: wrap; }
+.nav a { text-decoration: none; color: var(--ink); font-weight: 500; }
+.nav a:hover { color: var(--accent); }
+
+/* Buttons */
+.btn, .btn-ghost {
+  display: inline-block; padding: 0.55rem 1.1rem; border-radius: var(--radius);
+  text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 1rem;
+}
+.btn { background: var(--accent); color: #fff; }
+.btn:hover { background: var(--accent-dark); }
+.btn-ghost { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.btn-ghost:hover { background: var(--accent); color: #fff; }
+.btn-lg { padding: 0.8rem 1.6rem; font-size: 1.05rem; }
+.btn-block { width: 100%; margin-top: 0.5rem; }
+
+/* Hero */
+.hero { text-align: center; padding: 3.5rem 0 2rem; }
+.hero h1 { font-size: 2.4rem; margin: 0 0 0.5rem; }
+.lead { font-size: 1.2rem; color: var(--muted); }
+.hero-actions { display: flex; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; flex-wrap: wrap; }
+
+/* Cards */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; margin: 1rem 0 2rem; }
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1.1rem; text-decoration: none; color: var(--ink); box-shadow: var(--shadow);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(30,60,50,0.10); }
+.card h3 { margin: 0.4rem 0; }
+.tag {
+  display: inline-block; background: #e5f3ec; color: var(--accent-dark);
+  padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+}
+.muted { color: var(--muted); font-size: 0.92rem; margin: 0.2rem 0; }
+
+/* Forms */
+.form-card { max-width: 420px; margin: 2rem auto; background: var(--card); padding: 2rem;
+  border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+.form-card label { display: block; margin: 0.8rem 0 0.3rem; font-weight: 600; }
+.input { width: 100%; padding: 0.6rem 0.7rem; border: 1px solid var(--border);
+  border-radius: 8px; font-size: 1rem; font-family: inherit; }
+.input:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
+.field-error { color: #c0392b; font-size: 0.85rem; }
+
+/* Flash messages */
+.flash { padding: 0.7rem 1rem; border-radius: 8px; margin: 1rem 0; font-weight: 500; }
+.flash-success { background: #e5f3ec; color: var(--accent-dark); }
+.flash-danger { background: #fdecea; color: #c0392b; }
+.flash-info { background: #e8f1fb; color: #2c6ba0; }
+.flash-warning { background: #fef6e6; color: #a06a00; }
+
+/* Dashboard */
+.dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+.session-list, .notif-list { list-style: none; padding: 0; }
+.session-list li, .notif-list li { padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; }
+.notifications { background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.2rem; box-shadow: var(--shadow); }
+
+.event-detail { max-width: 640px; }
+
+/* Footer */
+.site-footer { margin-top: 3rem; padding: 1.5rem 0; border-top: 1px solid var(--border);
+  color: var(--muted); text-align: center; }
+
+@media (max-width: 640px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.9rem; }
+}
