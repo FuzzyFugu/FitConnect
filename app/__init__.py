@@ -19,9 +19,11 @@ def create_app(config_class=Config):
 
     # Register blueprints (feature modules)
     from app.auth.routes import auth_bp
+    from app.events.routes import events_bp
     from app.main.routes import main_bp
 
     app.register_blueprint(auth_bp)
+    app.register_blueprint(events_bp)
     app.register_blueprint(main_bp)
 
     # Create tables on first run for the SQLite MVP database.
