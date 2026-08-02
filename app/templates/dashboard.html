@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · FitConnect{% endblock %}
+{% block content %}
+<h1>Hi {{ current_user.username }} 👋</h1>
+
+<div class="dashboard-grid">
+  <section>
+    <h2>Your upcoming sessions</h2>
+    {% if attending %}
+      <ul class="session-list">
+        {% for event in attending %}
+          <li>
+            <a href="{{ url_for('events.detail', event_id=event.id) }}">{{ event.title }}</a>
+            <span class="muted">{{ event.starts_at.strftime('%a %d %b · %H:%M') }} · {{ event.location }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">You haven't joined any sessions yet.
+        <a href="{{ url_for('events.list_events') }}">Find one</a>.</p>
+    {% endif %}
+
+    <h2>Events you organise</h2>
+    {% if organising %}
+      <ul class="session-list">
+        {% for event in organising %}
+          <li>
+            <a href="{{ url_for('events.detail', event_id=event.id) }}">{{ event.title }}</a>
+            <span class="muted">{{ event.attendee_count }}/{{ event.capacity }} attending</span>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">You haven't created any events.
+        <a href="{{ url_for('events.create') }}">Create one</a>.</p>
+    {% endif %}
+  </section>
+
+  <aside class="notifications">
+    <h2>Reminders</h2>
+    {% if notifications %}
+      <ul class="notif-list">
+        {% for note in notifications %}
+          <li>{{ note.message }}<span class="muted">{{ note.created_at.strftime('%d %b %H:%M') }}</span></li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="muted">No reminders right now.</p>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

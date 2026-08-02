@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }} · FitConnect{% endblock %}
+{% block content %}
+<div class="form-card">
+  <h1>{{ heading }}</h1>
+  <form method="POST" novalidate>
+    {{ form.hidden_tag() }}
+    <label>{{ form.title.label }}{{ form.title(class="input") }}</label>
+    {% for e in form.title.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    <label>{{ form.description.label }}{{ form.description(class="input", rows=4) }}</label>
+    {% for e in form.description.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    <label>{{ form.location.label }}{{ form.location(class="input") }}</label>
+    {% for e in form.location.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    <label>{{ form.category.label }}{{ form.category(class="input") }}</label>
+    <label>{{ form.starts_at.label }}{{ form.starts_at(class="input") }}</label>
+    {% for e in form.starts_at.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    <label>{{ form.capacity.label }}{{ form.capacity(class="input") }}</label>
+    {% for e in form.capacity.errors %}<span class="field-error">{{ e }}</span>{% endfor %}
+    {{ form.submit(class="btn btn-block") }}
+  </form>
+</div>
+{% endblock %}

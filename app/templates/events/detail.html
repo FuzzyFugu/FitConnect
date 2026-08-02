@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}{{ event.title }} · FitConnect{% endblock %}
+{% block content %}
+<article class="event-detail">
+  <span class="tag">{{ event.category }}</span>
+  <h1>{{ event.title }}</h1>
+  <p class="muted">{{ event.starts_at.strftime('%A %d %B %Y · %H:%M') }} · {{ event.location }}</p>
+  <p class="muted">Organised by {{ event.organiser.username }} · {{ event.attendee_count }}/{{ event.capacity }} attending</p>
+
+  <p>{{ event.description }}</p>
+
+  {% if current_user.is_authenticated %}
+    {% if user_rsvped %}
+      <form method="POST" action="{{ url_for('events.cancel', event_id=event.id) }}">
+        <button class="btn-ghost" type="submit">Cancel my RSVP</button>
+      </form>
+    {% elif event.is_full %}
+      <p class="flash flash-warning">This event is full.</p>
+    {% else %}
+      <form method="POST" action="{{ url_for('events.rsvp', event_id=event.id) }}">
+        <button class="btn" type="submit">Join this event</button>
+      </form>
+    {% endif %}
+
+    {% if event.organiser_id == current_user.id %}
+      <a class="btn-ghost" href="{{ url_for('events.edit', event_id=event.id) }}">Edit event</a>
+    {% endif %}
+  {% else %}
+    <p><a href="{{ url_for('auth.login') }}">Log in</a> to RSVP.</p>
+  {% endif %}
+</article>
+{% endblock %}

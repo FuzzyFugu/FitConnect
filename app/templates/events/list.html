@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Events · FitConnect{% endblock %}
+{% block content %}
+<h1>Upcoming events</h1>
+{% if events %}
+  <div class="card-grid">
+    {% for event in events %}
+      <a class="card" href="{{ url_for('events.detail', event_id=event.id) }}">
+        <span class="tag">{{ event.category }}</span>
+        <h3>{{ event.title }}</h3>
+        <p class="muted">{{ event.starts_at.strftime('%a %d %b · %H:%M') }}</p>
+        <p class="muted">{{ event.location }}</p>
+        <p class="muted">{{ event.attendee_count }}/{{ event.capacity }} joined</p>
+      </a>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="muted">No upcoming events. <a href="{{ url_for('events.create') }}">Create the first one</a>.</p>
+{% endif %}
+{% endblock %}
